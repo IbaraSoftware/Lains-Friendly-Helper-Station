@@ -12,12 +12,12 @@ import PySimpleGUI as gui
 import os as sh
 # vars 
 HELPER = "Lain's Friendly Helper Station"
-SYSTEM = "Linux"
-DISTRO = "Arch"
+SYSTEM_INFO_COMM = "uname -a"
 UPDATE_COMM = "sudo pacman -Syu" 
 UPDATE_OPT = "Update my system!"
 SEARCH_OPT = "Search for packages." 
 AUR_OPT = "Enable the Arch User Repository (AUR)"
+EXIT_OPT = "Exit" 
 # gui theming
 gui.theme('Dark')
 # button functionality 
@@ -45,12 +45,14 @@ def enableAUR():
     print(aur1)
     sh.system(f'{getYay}')
     print(yayInst)
+def exitWindow():
+    exiting = "Exiting the program..."
+    window.close()        
 # window layout and functionality
 winLayout = [
     [gui.Text(f'{HELPER}')],
-    [gui.Text(f'nightshadeOS - {DISTRO} {SYSTEM}')],
     [gui.Text("Your friendly helper app to get things done on your system.")],
-    [gui.Button(f'{UPDATE_OPT}'), gui.Button(f'{SEARCH_OPT}'), gui.Button(f'{AUR_OPT}')]
+    [gui.Button(f'{UPDATE_OPT}'), gui.Button(f'{SEARCH_OPT}'), gui.Button(f'{AUR_OPT}'), gui.Button(f'{EXIT_OPT}')]
 ]
 window = gui.Window(f'{HELPER}', winLayout)
 while True: 
@@ -63,6 +65,6 @@ while True:
         pkgSearch()
     elif event == f'{AUR_OPT}':
         enableAUR()
-    else:
-        break
+    else event == f'{EXIT_OPT}':
+        exitWindow()
 window.close()
